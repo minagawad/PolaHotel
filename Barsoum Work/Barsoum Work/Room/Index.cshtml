@@ -1,0 +1,83 @@
+﻿@model IEnumerable<PolaHotel.Models.Room>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Room Number
+        </th>
+        <th>
+           Type Of Room
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+           Price
+        </th>
+        <th>
+           isavailble
+        </th>
+        <th>
+           NumberOfBeeds
+        </th>
+        <th>
+            Room Services
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Room_Number)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Room_Category.Category_Name)
+    </td>
+    <td>
+        <img src="~/Content/Images/@item.Image" style="width:150px;height:100px;" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.isavailble)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberOfBeeds)
+    </td>
+    <td>
+        @foreach (var t in item.RoomServices)
+        {
+           <input type="checkbox"  checked disabled/> @Html.DisplayFor(modelItem => t.Services.Name)
+        }
+
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { roomNo = item.Room_Number }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Room_Number }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Room_Number })
+    </td>
+</tr>
+}
+
+</table>

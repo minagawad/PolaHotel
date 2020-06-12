@@ -1,0 +1,78 @@
+﻿@model PolaHotel.Models.Room
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_Category.Category_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_Category.Category_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            <img src="~/Content/Images/@Model.Image" style="width:150px;height:100px;" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isavailble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isavailble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfBeeds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfBeeds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomServices)
+        </dt>
+        <dd>
+            @foreach (var t in Model.RoomServices)
+            {
+                <input type="checkbox" checked disabled />
+                @Html.DisplayFor(modelItem => t.Services.Name)
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Room_Number }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

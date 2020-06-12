@@ -1,0 +1,103 @@
+﻿@model PolaHotel.Models.Room
+
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    SelectList RoomCategory = new SelectList(ViewBag.RoomCategorys,"ID","Category_Name");
+    SelectList Services = new SelectList(ViewBag.Services, "ID", "Name");
+}
+
+<h2>Add Room</h2>
+
+
+@using (Html.BeginForm("Add","Room",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+    <h4>Room</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Room_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Room_Number, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Room_Number, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.isavailble, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.isavailble)
+                @Html.ValidationMessageFor(model => model.isavailble, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberOfBeeds, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NumberOfBeeds, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NumberOfBeeds, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Room_Categ_ID, "Room_Categ_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Room_Categ_ID", RoomCategory, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Room_Categ_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div>
+        @*@Html.DropDownList("IdServices", Services, htmlAttributes: new { @class = "form-control", multiple = "multiple" })*@
+        @Html.Label("Choose Services", "IdServices", htmlAttributes: new { @class = "control-label col-md-2" })
+        @foreach (var item in ViewBag.Services)
+        {
+            <input type="checkbox" value="@item.ID" name="IdServices" /><span style="padding-left:5px">@item.Name</span>
+        <span style="margin-left:20px"></span>
+        }
+    </div>
+<br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="upload" class="form-control" />
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
